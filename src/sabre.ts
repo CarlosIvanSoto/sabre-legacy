@@ -1,16 +1,16 @@
 
-import { ErrorResponse, LegacyActions } from "./interfaces";
+import type { ErrorResponse, Actions } from "./interfaces";
 import { getSubString } from "./common/utils/get-sub-string";
 import { baseUrl, conversationId, domain, userAgent } from "./config";
 import type { PostOptions } from "./common/interfaces/post-options.interface";
 import type { HeadersRequestOptions } from "./common/interfaces/headers-request-options.interface";
-import type { SessionCreateOptions } from "./authentication/interfaces/session-create-options.interface";
-import { ActionsRQ } from './common/interfaces/actions.interface';
 import { Authentication } from "./authentication/authentication.";
 import { Queue } from "./queue/queue";
 import { DailySales } from "./daily-sales/daily-sales";
+import type { SessionCreateOptions } from "./authentication/requests/interfaces/session-create-options.interface";
+import { ActionsRQ } from "./common/interfaces/actions.interface";
 
-export class LegacySabre {
+export class Sabre {
   private readonly headers: Headers;
   private readonly headersRequest: HeadersRequestOptions
 
@@ -45,7 +45,7 @@ export class LegacySabre {
     }
   }
 
-  setAction(action: LegacyActions) {
+  setAction(action: Actions) {
     this.headers.set('SOAPAction', action)
   }
 

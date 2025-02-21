@@ -1,5 +1,4 @@
-import { UsernameTokenOptions } from "../interfaces/username-token-options.interface";
-
+import { UsernameTokenOptions } from "../requests/interfaces/username-token-options.interface"
 /**
  * <UsernameToken>
  *  <Username>{{username}}</Username>

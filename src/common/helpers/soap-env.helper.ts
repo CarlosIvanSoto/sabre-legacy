@@ -9,11 +9,11 @@ import { SoapEnvOptions } from "../interfaces/soap-env-options.interface"
   *   {{body}}
   * </SOAP-ENV:Body>
  * </SOAP-ENV:Envelope>
- * @param options 
+ * @param payload 
  * @returns string
  */
-function soapEnv (options: SoapEnvOptions) {
-  const { header, body } = options
+function soapEnv (payload: SoapEnvOptions) {
+  const { header, body } = payload
   return `<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header>${header}</SOAP-ENV:Header><SOAP-ENV:Body>${body}</SOAP-ENV:Body></SOAP-ENV:Envelope>`
 }
 

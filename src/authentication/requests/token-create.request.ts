@@ -3,7 +3,7 @@ import { messageHeader } from "../../common/helpers/message-header.helper"
 import { security } from "../../common/helpers/security.helper"
 import { soapEnv } from "../../common/helpers/soap-env.helper"
 import { usernameToken } from "../helpers/username-token.helper"
-import { TokenCreateOptions } from "../interfaces"
+import { TokenCreateOptions } from "./interfaces/token-create-options.interface"
 
 /**
  * {{header}}
@@ -11,11 +11,11 @@ import { TokenCreateOptions } from "../interfaces"
  * <TokenCreateRQ Version="1.0.0" xmlns="http://webservices.sabre.com"/>
  * 
  * {{footer}}
- * @param options TokenCreateOptions
+ * @param payload TokenCreateOptions
  * @returns string
  */
-function tokenCreateRequest(options: TokenCreateOptions):string  {
-  const { conversationId, authorization } = options
+function tokenCreateRequest(payload: TokenCreateOptions):string  {
+  const { conversationId, authorization } = payload
   const message = messageHeader({
     action: ActionsRQ.TOKEN_CREATE,
     conversationId: conversationId,

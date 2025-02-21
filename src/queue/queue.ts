@@ -1,19 +1,16 @@
+import { parseXMLToQueueCount, parseXMLToQueueAccess, formatQueueResponse, parseXMLToQueuePlace, findBookingId } from "./common/utils";
+import { countRequest, accessRequest, ignoreRequest, removeRequest, exitRequest, placeRequest } from "./common/requests";
 import { ActionsRQ, ActionsRS } from "../common/interfaces/actions.interface";
-import { LegacySabre } from "../sabre";
-import { QueueAccessOptions, QueuePlaceOptions } from "./interfaces";
-import { countRequest, accessRequest, ignoreRequest, removeRequest, exitRequest, placeRequest } from "./requests";
-import { findBookingId } from "./utils/find-booking-id";
-import { formatQueueResponse } from "./utils/format-queue-response";
-import { parseXMLToQueueAccess } from "./utils/parse-xml-to-queue-access";
-import { parseXMLToQueueCount } from "./utils/parse-xml-to-queue-count";
-import { parseXMLToQueuePlace } from "./utils/parse-xml-to-queue-place";
+import { Sabre } from "../sabre";
+import { QueueAccessOptions, QueueAccessResponse, QueueCountResponse, QueueIgnoreResponse, QueuePlaceOptions, QueuePlaceResponse, QueueRemoveResponse } from "./interfaces";
 
 export class Queue {
   private readonly meta = {
     queue: '',
   }
-  constructor(private readonly sabre: LegacySabre) {}
-  async count(pcc?: string) {
+  constructor(private readonly sabre: Sabre) {}
+
+  async count(pcc?: string): Promise<QueueCountResponse> {
     if (!pcc) {
       if (typeof process !== 'undefined' && process.env) {
         pcc = process.env.SABRE_ORGANIZATION;
@@ -28,7 +25,7 @@ export class Queue {
     if (!response.data) throw new Error(`Response error ${response.error}`)
     return parseXMLToQueueCount(response.data)
   }
-  async access(payload: QueueAccessOptions) {
+  async access(payload: QueueAccessOptions): Promise<QueueAccessResponse> {
     if (!payload.pcc) {
       if (typeof process !== 'undefined' && process.env) {
         payload.pcc = process.env.SABRE_ORGANIZATION;
@@ -49,7 +46,7 @@ export class Queue {
       queue: this.meta.queue
     })
   }
-  async ignore() {
+  async ignore(): Promise<QueueIgnoreResponse> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
     const response = await this.sabre.post<string>(ignoreRequest)
     if (!response.data) throw new Error(`Response error ${response.error}`)
@@ -60,7 +57,7 @@ export class Queue {
       queue: this.meta.queue
     })
   }
-  async remove() {
+  async remove(): Promise<QueueRemoveResponse> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
     const response = await this.sabre.post<string>(removeRequest)
     if (!response.data) throw new Error(`Response error ${response.error}`)
@@ -75,7 +72,7 @@ export class Queue {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
     await this.sabre.post<string>(exitRequest)
   }
-  async place(payload: QueuePlaceOptions) {
+  async place(payload: QueuePlaceOptions): Promise<QueuePlaceResponse> {
     if (!payload.pcc) {
       if (typeof process !== 'undefined' && process.env) {
         payload.pcc = process.env.SABRE_ORGANIZATION;

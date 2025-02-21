@@ -25,4 +25,4 @@ export interface ErrorResponse {
   name: SABRE_ERROR_CODE_KEY;
 }
 
-export type LegacyActions = ActionsRQ | ActionsRS
+export type Actions = ActionsRQ | ActionsRS

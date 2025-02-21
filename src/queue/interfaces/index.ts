@@ -1,2 +1,5 @@
-export * from './queue-place-options.interface'
 export * from './queue-access-options.interface'
+export * from './queue-count.interface'
+export * from './queue-ignore.interface'
+export * from './queue-place-options.interface'
+export * from './queue-remove.interface'

@@ -11,16 +11,16 @@ import { MessageHeaderOptions } from "../interfaces/message-header-options.inter
  *  <ConversationId>{{conversationId}}</ConversationId>
  *  <Action>{{action}}</Action>
  * </MessageHeader>
- * @param options 
+ * @param payload 
  * @returns string
  */
-function messageHeader(options: MessageHeaderOptions) {
+function messageHeader(payload: MessageHeaderOptions) {
   const {
     from = 'Agency',
     to = 'SWS',
     conversationId = '2021.01.DevStudio',
     action,
-  } = options;
+  } = payload;
   return `<MessageHeader xmlns="http://www.ebxml.org/namespaces/messageHeader"><From><PartyId>${from}</PartyId></From><To><PartyId>${to}</PartyId></To><ConversationId>${conversationId}</ConversationId><Action>${action}</Action></MessageHeader>`
 }
 

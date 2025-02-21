@@ -6,11 +6,11 @@ import { security } from "./security.helper"
  * 
  * {{messageHeader({ action, conversationId }) + security(authorization)}}
  * 
- * @param options HeaderOptions
+ * @param payload HeaderOptions
  * @returns string
  */
-function header (options: HeaderOptions) {
-  const { action, conversationId, authorization } = options
+function header (payload: HeaderOptions) {
+  const { action, conversationId, authorization } = payload
   return messageHeader({ action, conversationId }) + security(authorization)
 }
 export { header }

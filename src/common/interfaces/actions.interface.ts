@@ -10,7 +10,8 @@ export enum ActionsRQ {
   DAILY_SALES_REPORT = 'DailySalesReportLLSRQ',
   PING = 'OTA_PingRQ',
   ENCODE_DECODE = 'EncodeDecodeLLSRQ',
-}
+} 
+
 export enum ActionsRS {
   SESSION_CLOSE = 'SessionCloseRS',
   QUEUE_ACCESS = 'QueueAccessLLSRS',

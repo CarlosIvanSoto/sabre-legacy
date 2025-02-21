@@ -1,6 +1,6 @@
-import { ActionsRQ } from "../../common/interfaces/actions.interface"
+import { ActionsRQ } from './../../common/interfaces/actions.interface';
 import { request } from "../../common/helpers/request.helper"
-import { SessionCloseOptions } from "../interfaces/session-close-options.interface"
+import { SessionCloseOptions } from "./interfaces/session-close-options.interface"
 
 /**
  * {{header}}
@@ -8,12 +8,12 @@ import { SessionCloseOptions } from "../interfaces/session-close-options.interfa
  * <SessionCloseRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11"/>
  * 
  * {{footer}}
- * @param options SessionCloseOptions 
+ * @param payload SessionCloseOptions 
  * @returns string
  */
-function sessionCloseRequest (options: SessionCloseOptions) {
+function sessionCloseRequest (payload: SessionCloseOptions) {
   const body = '<SessionCloseRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11"/>'
-  return request({ body, action: ActionsRQ.SESSION_CLOSE, ...options })
+  return request({ body, action: ActionsRQ.SESSION_CLOSE, ...payload })
 }
 
 export { sessionCloseRequest }

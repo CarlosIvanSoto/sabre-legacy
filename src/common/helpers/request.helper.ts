@@ -8,11 +8,11 @@ import { soapEnv } from "./soap-env.helper";
  *  {{body}}
  * 
  * {{footer}}
- * @param options 
+ * @param payload 
  * @returns string
  */
-function request(options: RequestOptions) {
-  const { action, conversationId, authorization, body } = options;
+function request(payload: RequestOptions) {
+  const { action, conversationId, authorization, body } = payload;
   return soapEnv({
     header: header({ action, conversationId, authorization }),
     body
