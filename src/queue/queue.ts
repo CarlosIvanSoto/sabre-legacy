@@ -19,11 +19,10 @@ export class Queue {
     if (!pcc) throw new Error('Missing pcc. Set it in count("PCC")')
     
     this.sabre.setAction(ActionsRQ.QUEUE_COUNT)
-    const response = await this.sabre.post<string>((opts) => countRequest({ 
+    const xml = await this.sabre.post<string>((opts) => countRequest({ 
       pcc, ...opts
     }))
-    if (!response.data) throw new Error(`Response error ${response.error}`)
-    return parseXMLToQueueCount(response.data)
+    return parseXMLToQueueCount(xml)
   }
   async access(payload: QueueAccessOptions): Promise<QueueAccessResponse> {
     if (!payload.pcc) {
@@ -34,12 +33,11 @@ export class Queue {
     if (!payload.pcc) throw new Error('Missing pcc. Set it in access({ pcc, number })')
     const { number, pcc } = payload
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
-    const response = await this.sabre.post<string>((opts) => accessRequest({
+    const xml = await this.sabre.post<string>((opts) => accessRequest({
       number, pcc, ...opts
     }))
-    if (!response.data) throw new Error(`Response error ${response.error}`)
     this.meta.queue = number
-    const queueAccess = parseXMLToQueueAccess(response.data)
+    const queueAccess = parseXMLToQueueAccess(xml)
     return formatQueueResponse({
       bookingId: queueAccess.line.uniqueID.iD,
       paragraph: queueAccess.paragraph,
@@ -48,9 +46,8 @@ export class Queue {
   }
   async ignore(): Promise<QueueIgnoreResponse> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
-    const response = await this.sabre.post<string>(ignoreRequest)
-    if (!response.data) throw new Error(`Response error ${response.error}`)
-    const queueAccess = parseXMLToQueueAccess(response.data)
+    const xml = await this.sabre.post<string>(ignoreRequest)
+    const queueAccess = parseXMLToQueueAccess(xml)
     return formatQueueResponse({
       bookingId: queueAccess.line.uniqueID.iD,
       paragraph: queueAccess.paragraph,
@@ -59,9 +56,8 @@ export class Queue {
   }
   async remove(): Promise<QueueRemoveResponse> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
-    const response = await this.sabre.post<string>(removeRequest)
-    if (!response.data) throw new Error(`Response error ${response.error}`)
-    const queueAccess = parseXMLToQueueAccess(response.data)
+    const xml = await this.sabre.post<string>(removeRequest)
+    const queueAccess = parseXMLToQueueAccess(xml)
     return formatQueueResponse({
       bookingId: queueAccess.line.uniqueID.iD,
       paragraph: queueAccess.paragraph,
@@ -81,11 +77,10 @@ export class Queue {
     if (!payload.pcc) throw new Error('Missing pcc. Set it in place({ pcc, number })')
     const { number, pcc } = payload
     this.sabre.setAction(ActionsRQ.QUEUE_PLACE)
-    const response = await this.sabre.post<string>((opts) => placeRequest({
+    const xml = await this.sabre.post<string>((opts) => placeRequest({
       number, pcc, ...opts
     }))
-    if (!response.data) throw new Error(`Response error ${response.error}`)
-    const queuePlace = parseXMLToQueuePlace(response.data)
+    const queuePlace = parseXMLToQueuePlace(xml)
     return formatQueueResponse({
       bookingId: findBookingId(queuePlace.text.pop()),
       paragraph: { text: queuePlace.text },

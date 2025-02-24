@@ -20,9 +20,8 @@ export class DailySales {
 
     const { pcc, date } = payload
     this.sabre.setAction(ActionsRQ.DAILY_SALES_REPORT)
-    const response = await this.sabre.post<string>((headersPayload) => reportRequest({ pcc, date, ...headersPayload }))
-    if (!response.data) throw new Error(`Response error ${response.error}`)
-    return parseXMLToDailySalesReport(response.data)
+    const xml = await this.sabre.post<string>((headersPayload) => reportRequest({ pcc, date, ...headersPayload }))
+    return parseXMLToDailySalesReport(xml)
   }
 
   async summary(payload: SummaryOptions) {
@@ -35,8 +34,7 @@ export class DailySales {
       
     const { pcc } = payload
     this.sabre.setAction(ActionsRQ.DAILY_SALES_REPORT)
-    const response = await this.sabre.post<string>((headersPayload) => summaryRequest({ pcc, ...payload, ...headersPayload }))
-    if (!response.data) throw new Error(`Response error ${response.error}`)
-    return parseXMLToDailySalesSummary(response.data)
+    const xml = await this.sabre.post<string>((headersPayload) => summaryRequest({ pcc, ...payload, ...headersPayload }))
+    return parseXMLToDailySalesSummary(xml)
   }
 }

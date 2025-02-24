@@ -7,22 +7,22 @@ export class Authentication {
 
   async sessionCreate() {
     this.sabre.setAction(ActionsRQ.SESSION_CREATE);
-    const response = await this.sabre.auth<string>(sessionCreateRequest);
-    return response
+    const xml = await this.sabre.auth<string>(sessionCreateRequest);
+    return xml
   }
   async sessionClose() {
     this.sabre.setAction(ActionsRQ.SESSION_CLOSE);
-    const response = await this.sabre.post(sessionCloseRequest);
-    return response
+    const xml = await this.sabre.post(sessionCloseRequest);
+    return xml
   }
   async ping() {
     this.sabre.setAction(ActionsRQ.PING);
-    const response = await this.sabre.post(pingRequest);
-    return response
+    const xml = await this.sabre.post(pingRequest);
+    return xml
   }
   async tokenCreate() {
     this.sabre.setAction(ActionsRQ.TOKEN_CREATE);
-    const response = await this.sabre.auth<string>(tokenCreateRequest);
-    return response
+    const xml = await this.sabre.auth<string>(tokenCreateRequest);
+    return xml
   }
 }
