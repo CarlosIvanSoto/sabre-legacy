@@ -48,37 +48,47 @@ export class Sabre {
     this.headers.set('SOAPAction', action)
   }
 
-  async fetchRequest<T>(
+  async fetchRequest(
     options = {},
-  ): Promise<T> {
-    const response = await fetch(baseUrl, options);
-    const xml = await response.text()
+  ): Promise<string> {
+    try {
 
-    if (!response.ok) {
-      const fault = getSubString(xml, '<faultstring>', '</faultstring>', false)
-      throw new FaultError(fault)
+      const response = await fetch(baseUrl, options);
+      const xml = await response.text()
+  
+      if (!response.ok) {
+        const fault = getSubString(xml, '<faultstring>', '</faultstring>', false)
+        throw new FaultError(fault)
+      }
+      const body = getSubString(xml, '<soap-env:Body>', '</soap-env:Body>', false)
+      const error = getSubString(body, '<stl:Error>', '</stl:Error>', false) 
+      if (error) {
+        const message = getSubString(error, '<stl:Message>', '</stl:Message>', false)
+        throw new ErrorInResponse(message)
+      }
+      const action = this.headers.get('SOAPAction')
+      // AUTHORIZATION INTERNAL MANAGEMENT
+      if (action === ActionsRQ.SESSION_CREATE || action === ActionsRQ.TOKEN_CREATE) {
+        const token = getSubString(xml, '<wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">', '</wsse:BinarySecurityToken>', false);
+        this.headersRequest.authorization = token;
+        this.headers.set('Authorization', `Bearer ${token}`)
+      } else if (action === ActionsRQ.SESSION_CLOSE) {
+        this.headersRequest.authorization = '';
+        this.headers.delete('Authorization')
+      }
+  
+      return body;
+    } catch (error) {
+      if (error instanceof FaultError || error instanceof ErrorInResponse) {
+        throw error;
+      }
+      throw error instanceof Error 
+        ? error 
+        : new Error('Unknown error');
     }
-    const body = getSubString(xml, '<soap-env:Body>', '</soap-env:Body>', false)
-    const error = getSubString(body, '<stl:Error>', '</stl:Error>', false) 
-    if (error) {
-      const message = getSubString(error, '<stl:Message>', '</stl:Message>', false)
-      throw new ErrorInResponse(message)
-    }
-    const action = this.headers.get('SOAPAction')
-    // AUTHORIZATION INTERNAL MANAGEMENT
-    if (action === ActionsRQ.SESSION_CREATE || action === ActionsRQ.TOKEN_CREATE) {
-      const token = getSubString(xml, '<wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">', '</wsse:BinarySecurityToken>', false);
-      this.headersRequest.authorization = token;
-      this.headers.set('Authorization', `Bearer ${token}`)
-    } else if (action === ActionsRQ.SESSION_CLOSE) {
-      this.headersRequest.authorization = '';
-      this.headers.delete('Authorization')
-    }
-
-    return body as T;
   }
 
-  async post<T>(handlerRequest: (payload: HeadersRequestOptions) => string, options: PostOptions = {}) {
+  async post(handlerRequest: (payload: HeadersRequestOptions) => string, options: PostOptions = {}): Promise<string> {
     if (!this.headersRequest.authorization) throw new Error('Missing authorization. Set it in setToken("TOKEN")')
     const requestOptions = {
       method: 'POST',
@@ -87,10 +97,10 @@ export class Sabre {
       ...options,
     };
 
-    return this.fetchRequest<T>(requestOptions);
+    return this.fetchRequest(requestOptions);
   }
 
-  async auth<T>(handlerRequest:(payload: SessionCreateOptions) => string, options: PostOptions = {}) {
+  async auth(handlerRequest:(payload: SessionCreateOptions) => string, options: PostOptions = {}): Promise<string> {
     if (!this.options.username || !this.options.password || !this.options.organization)
       throw new Error('Missing authorization. Pass it to the constructor `new LegacySabre("USERNAME", "PASSWORD", "ORGANIZATION")')
 
@@ -109,6 +119,6 @@ export class Sabre {
       ...options,
     };
 
-    return this.fetchRequest<T>(requestOptions);
+    return this.fetchRequest(requestOptions);
   }
 }

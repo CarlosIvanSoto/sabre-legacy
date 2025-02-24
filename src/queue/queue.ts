@@ -19,7 +19,7 @@ export class Queue {
     if (!pcc) throw new Error('Missing pcc. Set it in count("PCC")')
     
     this.sabre.setAction(ActionsRQ.QUEUE_COUNT)
-    const xml = await this.sabre.post<string>((opts) => countRequest({ 
+    const xml = await this.sabre.post((opts) => countRequest({ 
       pcc, ...opts
     }))
     return parseXMLToQueueCount(xml)
@@ -33,7 +33,7 @@ export class Queue {
     if (!payload.pcc) throw new Error('Missing pcc. Set it in access({ pcc, number })')
     const { number, pcc } = payload
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
-    const xml = await this.sabre.post<string>((opts) => accessRequest({
+    const xml = await this.sabre.post((opts) => accessRequest({
       number, pcc, ...opts
     }))
     this.meta.queue = number
@@ -46,7 +46,7 @@ export class Queue {
   }
   async ignore(): Promise<QueueIgnoreResponse> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
-    const xml = await this.sabre.post<string>(ignoreRequest)
+    const xml = await this.sabre.post(ignoreRequest)
     const queueAccess = parseXMLToQueueAccess(xml)
     return formatQueueResponse({
       bookingId: queueAccess.line.uniqueID.iD,
@@ -56,7 +56,7 @@ export class Queue {
   }
   async remove(): Promise<QueueRemoveResponse> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
-    const xml = await this.sabre.post<string>(removeRequest)
+    const xml = await this.sabre.post(removeRequest)
     const queueAccess = parseXMLToQueueAccess(xml)
     return formatQueueResponse({
       bookingId: queueAccess.line.uniqueID.iD,
@@ -66,7 +66,7 @@ export class Queue {
   }
   async exit(): Promise<void> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
-    await this.sabre.post<string>(exitRequest)
+    await this.sabre.post(exitRequest)
   }
   async place(payload: QueuePlaceOptions): Promise<QueuePlaceResponse> {
     if (!payload.pcc) {
@@ -77,7 +77,7 @@ export class Queue {
     if (!payload.pcc) throw new Error('Missing pcc. Set it in place({ pcc, number })')
     const { number, pcc } = payload
     this.sabre.setAction(ActionsRQ.QUEUE_PLACE)
-    const xml = await this.sabre.post<string>((opts) => placeRequest({
+    const xml = await this.sabre.post((opts) => placeRequest({
       number, pcc, ...opts
     }))
     const queuePlace = parseXMLToQueuePlace(xml)

@@ -20,7 +20,7 @@ export class DailySales {
 
     const { pcc, date } = payload
     this.sabre.setAction(ActionsRQ.DAILY_SALES_REPORT)
-    const xml = await this.sabre.post<string>((headersPayload) => reportRequest({ pcc, date, ...headersPayload }))
+    const xml = await this.sabre.post((headersPayload) => reportRequest({ pcc, date, ...headersPayload }))
     return parseXMLToDailySalesReport(xml)
   }
 
@@ -34,7 +34,7 @@ export class DailySales {
       
     const { pcc } = payload
     this.sabre.setAction(ActionsRQ.DAILY_SALES_REPORT)
-    const xml = await this.sabre.post<string>((headersPayload) => summaryRequest({ pcc, ...payload, ...headersPayload }))
+    const xml = await this.sabre.post((headersPayload) => summaryRequest({ pcc, ...payload, ...headersPayload }))
     return parseXMLToDailySalesSummary(xml)
   }
 }
