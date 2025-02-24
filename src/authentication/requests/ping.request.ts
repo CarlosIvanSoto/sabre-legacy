@@ -11,7 +11,7 @@ import { PingOptions } from "./interfaces/ping-options.interface"
  * @param payload PingOptions
  * @returns string
  */
-function pingRequest(payload: PingOptions) {
+function pingRequest(payload: PingOptions): string {
   const body = '<OTA_PingRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2003/05"/>'
   return request({ body, action: ActionsRQ.PING, ...payload })
 }

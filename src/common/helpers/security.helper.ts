@@ -5,7 +5,7 @@
  * @param authorization
  * @returns 
  */
-function security (authorization: string) {
+function security (authorization: string): string {
   return `<Security xmlns="http://schemas.xmlsoap.org/ws/2002/12/secext">${authorization}</Security>`
 }
 

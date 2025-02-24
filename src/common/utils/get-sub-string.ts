@@ -1,4 +1,4 @@
-export function getSubString (strSearch: string, strBegin: string, strEnd: string, withEnd: boolean) {
+export function getSubString (strSearch: string, strBegin: string, strEnd: string, withEnd: boolean): string {
   let strSub = ''
   const intBegin = strSearch.indexOf(strBegin)
   if (intBegin !== -1) {

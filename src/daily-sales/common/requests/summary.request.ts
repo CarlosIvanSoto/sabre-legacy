@@ -15,7 +15,7 @@ import { SummaryRequestOptions } from "./interfaces/summary-options.interface"
  * @param options SummaryOptions
  * @returns string
  */
-function summaryRequest(options: SummaryRequestOptions) {
+function summaryRequest(options: SummaryRequestOptions): string {
   const { authorization, conversationId, ...summaryOptions } = options
   const selectionCriteria = parseSummaryOptionsToXML(summaryOptions)
   const body = `<DailySalesSummaryRQ version="1.2.2" xmlns="http://www.sabre.com/ns/Ticketing/AsrServices/1.0"><Header/>${selectionCriteria}</DailySalesSummaryRQ>`

@@ -14,7 +14,7 @@ import { SessionCreateOptions } from "./interfaces/session-create-options.interf
  * @param payload SessionCreateOptions
  * @returns string
  */
-function sessionCreateRequest(payload: SessionCreateOptions):string  {
+function sessionCreateRequest(payload: SessionCreateOptions): string {
   const { conversationId, authorization } = payload
   const message = messageHeader({
     action: ActionsRQ.SESSION_CREATE,

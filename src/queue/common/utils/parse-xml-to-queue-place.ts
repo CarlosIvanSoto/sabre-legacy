@@ -1,7 +1,7 @@
 import { parseXML } from "../../../common/config/xml-parser.config";
-import { QueuePlaceResponseSuccess } from "./interfaces";
+import { QueuePlaceResponseSuccess, QueuePlaceRS } from "./interfaces";
 
-function parseXMLToQueuePlace(body: string) {
+function parseXMLToQueuePlace(body: string): QueuePlaceRS {
   return parseXML<QueuePlaceResponseSuccess>(body).queuePlaceRS
 }
 

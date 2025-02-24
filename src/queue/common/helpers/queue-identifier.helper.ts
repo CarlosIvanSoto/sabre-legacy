@@ -15,7 +15,7 @@ import { QueueIdentifierOptions } from "./interfaces/queue-identifier-options.in
  * @param options QueueIdentifierOptions
  * @returns string
  */
-function queueIdentifier(options: QueueIdentifierOptions) {
+function queueIdentifier(options: QueueIdentifierOptions): string {
   const { pcc, number, ind, code } = options
   const listParam = ind ? '><List Ind="true" PrimaryPassenger="true" /></QueueIdentifier>' : '/>'
   const numberParam = number ? `Number="${number}" ` : ''

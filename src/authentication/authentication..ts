@@ -5,22 +5,22 @@ import { pingRequest, sessionCloseRequest, sessionCreateRequest, tokenCreateRequ
 export class Authentication {
   constructor(private readonly sabre: Sabre) {}
 
-  async sessionCreate() {
+  async sessionCreate(): Promise<string> {
     this.sabre.setAction(ActionsRQ.SESSION_CREATE);
     const xml = await this.sabre.auth<string>(sessionCreateRequest);
     return xml
   }
-  async sessionClose() {
+  async sessionClose(): Promise<string> {
     this.sabre.setAction(ActionsRQ.SESSION_CLOSE);
-    const xml = await this.sabre.post(sessionCloseRequest);
+    const xml = await this.sabre.post<string>(sessionCloseRequest);
     return xml
   }
-  async ping() {
+  async ping(): Promise<string> {
     this.sabre.setAction(ActionsRQ.PING);
-    const xml = await this.sabre.post(pingRequest);
+    const xml = await this.sabre.post<string>(pingRequest);
     return xml
   }
-  async tokenCreate() {
+  async tokenCreate(): Promise<string> {
     this.sabre.setAction(ActionsRQ.TOKEN_CREATE);
     const xml = await this.sabre.auth<string>(tokenCreateRequest);
     return xml

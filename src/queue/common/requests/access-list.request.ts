@@ -13,7 +13,7 @@ import { AccessOptions } from "./interfaces/access-options.interface";
  * @param options AccessOptions
  * @returns string
  */
-function accessListRequest(options: AccessOptions) {
+function accessListRequest(options: AccessOptions): string {
   const { pcc, number, authorization, conversationId } = options;
   const queueInfo = queueIdentifier({ pcc, number, ind: true });
   const body = queueAccess(queueInfo);

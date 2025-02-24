@@ -1,7 +1,7 @@
 import { parseXML } from "../../../common/config/xml-parser.config"
-import { QueueCountResponseSuccess } from "./interfaces/queue-count.interface"
+import { QueueCountResponseSuccess, QueueCountRS } from "./interfaces/queue-count.interface"
 
-function parseXMLToQueueCount(body: string) {
+function parseXMLToQueueCount(body: string): QueueCountRS {
   const { queueCountRS } = parseXML<QueueCountResponseSuccess>(body)
   return queueCountRS
 }

@@ -11,7 +11,7 @@ import { UsernameTokenOptions } from "../requests/interfaces/username-token-opti
  * @param options 
  * @returns string
  */
-function usernameToken (options: UsernameTokenOptions) {
+function usernameToken (options: UsernameTokenOptions): string {
   const { username, password, pcc, domain } = options
   return `<UsernameToken><Username>${username}</Username><Password>${password}</Password><Organization>${pcc}</Organization><Domain>${domain}</Domain></UsernameToken>`
 }

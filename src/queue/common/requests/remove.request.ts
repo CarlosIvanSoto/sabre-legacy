@@ -13,7 +13,7 @@ import { RemoveOptions } from "./interfaces/remove-options.interface";
  * @param options RemoveOptions
  * @returns string
  */
-function removeRequest(options: RemoveOptions) {
+function removeRequest(options: RemoveOptions): string {
   const { authorization, conversationId } = options 
   const body = navigationAction(NavigationAction.IGNORE);
   return request({ authorization, conversationId, body, action: ActionsRQ.QUEUE_ACCESS })

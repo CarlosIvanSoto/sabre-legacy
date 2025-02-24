@@ -1,7 +1,7 @@
 import { SummaryOptions } from "../requests/interfaces/summary-options.interface";
 import { parseSummaryOptionsToSelectionCriteria } from "./parse-summary-options-to-selection-criteria";
 
-function parseSummaryOptionsToXML(payload: SummaryOptions) {
+function parseSummaryOptionsToXML(payload: SummaryOptions): string {
   const SelectionCriteria = parseSummaryOptionsToSelectionCriteria(payload)
 
   const {XMLBuilder} = require('fast-xml-parser');

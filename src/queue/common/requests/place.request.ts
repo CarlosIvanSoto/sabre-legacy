@@ -14,7 +14,7 @@ import { PlaceOptions } from "./interfaces/place-options.inferface"
  * @param options PlaceOptions
  * @returns string
  */
-function placeRequest(options: PlaceOptions) {
+function placeRequest(options: PlaceOptions): string {
   const { number, pcc, authorization, conversationId } = options; 
   const queueInfo = queueIdentifier({ number, code: 11, pcc });
   const body = queuePlace(queueInfo);

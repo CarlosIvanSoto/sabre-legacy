@@ -64,7 +64,7 @@ export class Queue {
       queue: this.meta.queue
     })
   }
-  async exit() {
+  async exit(): Promise<void> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
     await this.sabre.post<string>(exitRequest)
   }

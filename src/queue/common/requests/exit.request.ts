@@ -13,7 +13,7 @@ import { NavigationAction } from "../../common/helpers/interfaces/navigation-act
  * @param options ExitOptions
  * @returns string
  */
-function exitRequest(options: ExitOptions) {
+function exitRequest(options: ExitOptions): string {
   const { authorization, conversationId } = options 
   const body = navigationAction(NavigationAction.EXIT);
   return request({ authorization, conversationId, body, action: ActionsRQ.QUEUE_ACCESS })

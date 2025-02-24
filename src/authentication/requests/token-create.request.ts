@@ -14,7 +14,7 @@ import { TokenCreateOptions } from "./interfaces/token-create-options.interface"
  * @param payload TokenCreateOptions
  * @returns string
  */
-function tokenCreateRequest(payload: TokenCreateOptions):string  {
+function tokenCreateRequest(payload: TokenCreateOptions): string {
   const { conversationId, authorization } = payload
   const message = messageHeader({
     action: ActionsRQ.TOKEN_CREATE,

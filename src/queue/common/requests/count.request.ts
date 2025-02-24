@@ -13,7 +13,7 @@ import { CountOptions } from "./interfaces/count-options.interface";
  * @param options QueueCountOptions
  * @returns string
  */
-function countRequest(options: CountOptions) {
+function countRequest(options: CountOptions): string {
   const { authorization, conversationId, pcc } = options;
   const queueInfo = queueIdentifier({ pcc });
   const body = queueCount(queueInfo)

@@ -13,7 +13,7 @@ import { NavigationAction } from "../../common/helpers/interfaces/navigation-act
  * @param options IgnoreOptions
  * @returns string
  */
-function ignoreRequest(options: IgnoreOptions) {
+function ignoreRequest(options: IgnoreOptions): string {
   const { authorization, conversationId } = options 
   const body = navigationAction(NavigationAction.IGNORE);
   return request({ authorization, conversationId, body, action: ActionsRQ.QUEUE_ACCESS })
