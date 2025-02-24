@@ -1,5 +1,5 @@
 {
-  "exclude": ["node_modules", "build"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "lib": ["ESNext"],
     "module": "ESNext",
@@ -13,5 +13,5 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src", "index.ts"]
+  "include": ["src"]
 }
