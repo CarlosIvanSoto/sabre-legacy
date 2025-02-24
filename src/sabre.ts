@@ -20,7 +20,7 @@ export class Sabre {
   readonly queue = new Queue(this)
   readonly dailySales = new DailySales(this)
 
-  constructor(options: SabreOptions = {}) {
+  constructor(options: SabreOptions | undefined = {}) {
     const { username, password, organization } = options
     const processEnv = typeof process !== 'undefined' && process.env
     if (!username && processEnv) 
