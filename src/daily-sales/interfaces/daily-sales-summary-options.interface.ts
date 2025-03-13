@@ -42,6 +42,9 @@ interface DailySalesReport {
   totalDailySales: TotalDailySales
 }
 interface Transaction {
+  nonInteractive?: string
+  electronicDocument?: string
+  itineraryType?: string
   documentType: DocumentType
   settlementType: SettlementType
   pnrLocator?: string
