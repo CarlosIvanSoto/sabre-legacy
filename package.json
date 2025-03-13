@@ -1,20 +1,20 @@
 {
   "name": "sabre-legacy-client",
   "version": "0.1.6",
-  "description": "Sabre Node.js SDK",
+  "description": "Sabre Legacy Node.js SDK",
   "keywords": [
     "sabre",
     "legacy",
     "client",
     "soap"
   ],
-  "homepage": "https://github.com/CarlosIvanSoto/sabre-legacy-client#readme",
+  "homepage": "https://github.com/CarlosIvanSoto/sabre-legacy#readme",
   "bugs": {
-    "url": "https://github.com/CarlosIvanSoto/sabre-legacy-client/issues"
+    "url": "https://github.com/CarlosIvanSoto/sabre-legacy/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CarlosIvanSoto/sabre-legacy-client.git"
+    "url": "git+https://github.com/CarlosIvanSoto/sabre-legacy.git"
   },
   "license": "MIT",
   "author": "Carlos Ivan Soto <csoto_99@outlook.com>",
