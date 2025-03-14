@@ -24,6 +24,11 @@ export class DailySales {
     return parseXMLToDailySalesReport(xml)
   }
 
+  /**
+   * See https://developer.sabre.com/docs/soap_apis/air/fulfill/display_audit_trail
+   * @param payload 
+   * @returns 
+   */
   async summary(payload: SummaryOptions): Promise<DailySalesSummaryRS> {
     if (!payload.pcc) {
       if (typeof process !== 'undefined' && process.env) {

@@ -47,6 +47,13 @@ export class Sabre {
   setAction(action: Actions) {
     this.headers.set('SOAPAction', action)
   }
+  setAuthorization(token: string) {
+    this.headersRequest.authorization = token;
+    this.headers.set('Authorization', `Bearer ${token}`)
+  }
+  getAuthorization() {
+    return this.headersRequest.authorization
+  }
 
   async fetchRequest(
     options = {},
@@ -68,10 +75,10 @@ export class Sabre {
       }
       const action = this.headers.get('SOAPAction')
       // AUTHORIZATION INTERNAL MANAGEMENT
+      // Change authorization internal for the reason: token no exported - vie 14 de mar del 25
       if (action === ActionsRQ.SESSION_CREATE || action === ActionsRQ.TOKEN_CREATE) {
         const token = getSubString(xml, '<wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">', '</wsse:BinarySecurityToken>', false);
-        this.headersRequest.authorization = token;
-        this.headers.set('Authorization', `Bearer ${token}`)
+        this.setAuthorization(token)
       } else if (action === ActionsRQ.SESSION_CLOSE) {
         this.headersRequest.authorization = '';
         this.headers.delete('Authorization')
