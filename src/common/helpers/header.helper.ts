@@ -1,4 +1,5 @@
 import { HeaderOptions } from "../interfaces/header-options.interface"
+import { binarySecurityToken } from "./binary-security-token.helper"
 import { messageHeader } from "./message-header.helper"
 import { security } from "./security.helper"
 
@@ -11,6 +12,7 @@ import { security } from "./security.helper"
  */
 function header (payload: HeaderOptions) {
   const { action, conversationId, authorization } = payload
-  return messageHeader({ action, conversationId }) + security(authorization)
+  const binarySecurity = binarySecurityToken(authorization)
+  return messageHeader({ action, conversationId }) + security(binarySecurity)
 }
 export { header }
