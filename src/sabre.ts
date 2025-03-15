@@ -10,6 +10,7 @@ import { DailySales } from "./daily-sales/daily-sales";
 import type { SessionCreateOptions } from "./authentication/requests/interfaces/session-create-options.interface";
 import { ActionsRQ } from "./common/interfaces/actions.interface";
 import { ErrorInResponse, FaultError } from "./common/utils";
+import { Currency } from "./currency/currency";
 
 export class Sabre {
   private readonly headers: Headers;
@@ -20,6 +21,7 @@ export class Sabre {
   readonly authentication = new Authentication(this)
   readonly queue = new Queue(this)
   readonly dailySales = new DailySales(this)
+  readonly currency = new Currency(this)
 
   constructor(options: SabreOptions | undefined = {}) {
     const { username, password, organization } = options
