@@ -10,6 +10,11 @@ import { DailySalesSummaryRS, SummaryOptions } from "./interfaces/daily-sales-su
 export class DailySales {
   constructor(private readonly sabre: Sabre) {}
 
+  /**
+   * See https://developer.sabre.com/docs/soap_apis/air/fulfill/Get_Sales_Reports
+   * @param payload ReportOptions
+   * @returns DailySalesReportRS
+   */
   async report(payload: ReportOptions): Promise<DailySalesReportRS> {
     if (!payload.pcc) {
       if (typeof process !== 'undefined' && process.env) {
@@ -27,7 +32,7 @@ export class DailySales {
   /**
    * See https://developer.sabre.com/docs/soap_apis/air/fulfill/display_audit_trail
    * @param payload 
-   * @returns 
+   * @returns DailySalesSummaryRS
    */
   async summary(payload: SummaryOptions): Promise<DailySalesSummaryRS> {
     if (!payload.pcc) {
