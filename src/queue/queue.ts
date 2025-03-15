@@ -10,6 +10,11 @@ export class Queue {
   }
   constructor(private readonly sabre: Sabre) {}
 
+  /**
+   * See https://developer.sabre.com/docs/soap_apis/management/queue/Get_Queue_Count
+   * @param pcc string
+   * @returns QueueCountResponse
+   */
   async count(pcc?: string): Promise<QueueCountResponse> {
     if (!pcc) {
       if (typeof process !== 'undefined' && process.env) {
@@ -24,6 +29,12 @@ export class Queue {
     }))
     return parseXMLToQueueCount(xml)
   }
+
+  /**
+   * See https://developer.sabre.com/docs/soap_apis/management/queue/Access_Queue
+   * @param payload QueueAccessOptions
+   * @returns QueueAccessResponse
+   */
   async access(payload: QueueAccessOptions): Promise<QueueAccessResponse> {
     if (!payload.pcc) {
       if (typeof process !== 'undefined' && process.env) {
@@ -44,6 +55,11 @@ export class Queue {
       queue: this.meta.queue
     })
   }
+
+  /**
+   * See https://developer.sabre.com/docs/soap_apis/management/queue/Access_Queue
+   * @returns QueueIgnoreResponse
+   */
   async ignore(): Promise<QueueIgnoreResponse> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
     const xml = await this.sabre.post(ignoreRequest)
@@ -54,7 +70,12 @@ export class Queue {
       queue: this.meta.queue
     })
   }
-  async remove(): Promise<QueueRemoveResponse> {
+
+  /**
+   * See https://developer.sabre.com/docs/soap_apis/management/queue/Access_Queue
+   * @returns QueueIgnoreResponse
+   */
+  async remove(): Promise<QueueIgnoreResponse> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
     const xml = await this.sabre.post(removeRequest)
     const queueAccess = parseXMLToQueueAccess(xml)
@@ -64,10 +85,20 @@ export class Queue {
       queue: this.meta.queue
     })
   }
+
+  /**
+   * See https://developer.sabre.com/docs/soap_apis/management/queue/Access_Queue
+   */
   async exit(): Promise<void> {
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
     await this.sabre.post(exitRequest)
   }
+
+  /**
+   * See https://developer.sabre.com/docs/soap_apis/management/queue/Place_Queue_Message
+   * @param payload QueuePlaceOptions
+   * @returns QueuePlaceResponse
+   */
   async place(payload: QueuePlaceOptions): Promise<QueuePlaceResponse> {
     if (!payload.pcc) {
       if (typeof process !== 'undefined' && process.env) {
