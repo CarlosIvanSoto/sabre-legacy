@@ -7,3 +7,9 @@ export interface SabreOptions {
   password?: string,
   organization?: string, // PCC
 }
+
+export interface FetchRequestOptions {
+  method: 'POST',
+  headers: Headers,
+  body: string,
+}

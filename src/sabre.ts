@@ -1,5 +1,5 @@
 
-import type { Actions, SabreOptions } from "./interfaces";
+import type { Actions, FetchRequestOptions, SabreOptions } from "./interfaces";
 import { getSubString } from "./common/utils/get-sub-string";
 import { baseUrl, conversationId, domain, userAgent } from "./config";
 import type { PostOptions } from "./common/interfaces/post-options.interface";
@@ -15,6 +15,7 @@ export class Sabre {
   private readonly headers: Headers;
   private readonly headersRequest: HeadersRequestOptions
   private readonly options: SabreOptions = {}
+  private lastReq: FetchRequestOptions | {} = {};
 
   readonly authentication = new Authentication(this)
   readonly queue = new Queue(this)
@@ -55,11 +56,15 @@ export class Sabre {
     return this.headersRequest.authorization
   }
 
-  async fetchRequest(
-    options = {},
-  ): Promise<string> {
-    try {
+  getLastRequest() {
+    return this.lastReq;
+  }
 
+  async fetchRequest(
+    options: FetchRequestOptions | {} = {},
+  ): Promise<string> {
+    this.lastReq = options
+    try {
       const response = await fetch(baseUrl, options);
       const xml = await response.text()
   
@@ -96,7 +101,7 @@ export class Sabre {
   }
 
   async post(handlerRequest: (payload: HeadersRequestOptions) => string, options: PostOptions = {}): Promise<string> {
-    if (!this.headersRequest.authorization) throw new Error('Missing authorization. Set it in setToken("TOKEN")')
+    if (!this.headersRequest.authorization) throw new Error('Missing authorization. Set it in setAuthorization("TOKEN")')
     const requestOptions = {
       method: 'POST',
       headers: this.headers,
