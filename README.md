@@ -14,6 +14,7 @@ First, you need to get an username, password and pcc which is available in the [
 
 ```js
 import { SabreLegacy } from 'sabre-legacy-client';
+
 const sabre = new SabreLegacy({
   username: '773400', 
   password: 'PASSWORD_GOES_HERE',
