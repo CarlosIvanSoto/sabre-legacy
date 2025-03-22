@@ -15,7 +15,6 @@ import { Currency } from "./currency/currency";
 export class Sabre {
   private readonly headers: Headers;
   private readonly headersRequest: HeadersRequestOptions
-  private readonly options: SabreOptions = {}
   private lastReq: FetchRequestOptions | {} = {};
 
   readonly authentication = new Authentication(this)
@@ -23,18 +22,21 @@ export class Sabre {
   readonly dailySales = new DailySales(this)
   readonly currency = new Currency(this)
 
-  constructor(options: SabreOptions | undefined = {}) {
-    const { username, password, organization } = options
+  constructor(private readonly options: SabreOptions = {}) {
     const processEnv = typeof process !== 'undefined' && process.env
-    if (!username && processEnv) 
+    if (!this.options.username && processEnv) 
       this.options.username = processEnv.SABRE_USERNAME
-    if (!password && processEnv)
+    if (!this.options.password && processEnv)
       this.options.password = processEnv.SABRE_PASSWORD
-    if (!organization && processEnv)
+    if (!this.options.organization && processEnv)
       this.options.organization = processEnv.SABRE_ORGANIZATION
 
     if (!this.options.username || !this.options.password || !this.options.organization) {
-      throw new Error('Missing LegacySabre authorization. Pass it to the constructor `new LegacySabre("USERNAME", "PASSWORD", "ORGANIZATION")')
+      throw new Error(`Missing SabreLegacy authorization. Pass it to the constructor new SabreLegacy({
+        username: '773400', 
+        password: 'PASSWORD_GOES_HERE',
+        organization: '7TZA', // pcc
+      });})`)
     }
 
     this.headers = new Headers({
