@@ -13,7 +13,7 @@ export class Currency {
    * Sabre equivalent command -> DC¥USD1/MXN/19MAR25
    */
   async conversion(payload: CurrencyOptions): Promise<SabreCommandLLSRS> {
-    this.sabre.setAction(ActionsRQ.SABRE_COMMANDS);
+    this.sabre.setAction(ActionsRQ.SABRE_COMMAND);
     const {from, to, date} = payload;
     const xml = await this.sabre.post((headersPayload) => currencyRequest({ from, to, date, ...headersPayload }))
     return parseXMLToSabreCommand(xml)
