@@ -2,8 +2,8 @@ import { ActionsRQ } from "../common/interfaces/actions.interface";
 import { SabreCommandLLSRS } from "../common/interfaces/sabre-command.interface";
 import { parseXMLToSabreCommand } from "../common/utils/parse-xml-to-sabre-command";
 import { Sabre } from "../sabre";
+import { CurrencyOptions } from "./interfaces/currency-options.interface";
 import { currencyRequest } from "./requests/currency.request";
-import { CurrencyOptions } from "./requests/interfaces/currency-options";
 
 export class Currency {
   constructor(private readonly sabre: Sabre) {}

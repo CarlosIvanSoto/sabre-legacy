@@ -1,4 +1,5 @@
-import { HeadersRequestOptions } from "../../../common/interfaces/headers-request-options.interface";
+import { HeadersRequestOptions } from "../../common/interfaces";
+
 
 export interface CurrencyOptions  extends HeadersRequestOptions {
     from: string;
