@@ -1,8 +1,8 @@
 import { request } from "../../common/helpers/request.helper";
 import { sabreCommand } from "../../common/helpers/sabre-command.helper";
 import { ActionsRQ } from "../../common/interfaces/actions.interface";
-import { formatCurrencyCommand } from "../helpers/currency-command-formart.helper";
-import { CurrencyOptions } from "../interfaces/currency-options.interface";
+import { formatCurrencyCommand } from "../helpers/format-currency-command.helper";
+import { CurrencyOptions } from "../requests/interfaces/currency-options.interface";
 
 /**
  * {{header}}
