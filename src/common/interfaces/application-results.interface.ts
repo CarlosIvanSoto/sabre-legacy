@@ -1,4 +1,12 @@
 export interface ApplicationResults {
+  error?: {
+    systemSpecificResults?: {
+      message: string
+      shortText: string
+    }
+    type: string
+    timeStamp: string
+  },
   success: { 
     systemSpecificResults?: {
       hostCommad: { 
@@ -6,7 +14,7 @@ export interface ApplicationResults {
         lNIATA: string
       }
     }
-    timeStamp: string 
+    timeStamp: string
   }
   status: string
 }
