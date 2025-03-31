@@ -11,7 +11,6 @@ MXN        20         ROUNDED UP TO NEXT   1      - FARES
 MXN        20         ROUNDED UP TO NEXT   1      - TAXES</Response></SabreCommandLLSRS>`;
   
     const sabreCommand = parseXMLToSabreCommand(xmlPayload)
-    console.dir(sabreCommand, { depth: null })
 
     expect(sabreCommand).toEqual({
       applicationResults: {
@@ -23,13 +22,13 @@ MXN        20         ROUNDED UP TO NEXT   1      - TAXES</Response>
         },
         status: 'Complete'
       },
-      response: 'RATE BSR 1USD -  19.9845          MXN\n' +
-        '\n' +
-        'MXN        19.9       TRUNCATED\n' +
-        '\n' +
-        'MXN        20         ROUNDED UP TO NEXT   1      - FARES\n' +
-        '\n' +
-        'MXN        20         ROUNDED UP TO NEXT   1      - TAXES'
+      response: `RATE BSR 1USD -  19.9845          MXN
+
+MXN        19.9       TRUNCATED
+
+MXN        20         ROUNDED UP TO NEXT   1      - FARES
+
+MXN        20         ROUNDED UP TO NEXT   1      - TAXES`
     })
   })
 
