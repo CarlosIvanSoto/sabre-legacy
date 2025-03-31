@@ -1,7 +1,7 @@
 import { request } from "../../../common/helpers/request.helper";
 import { ActionsRQ } from "../../../common/interfaces/actions.interface";
 import { queueCount } from "../../common/helpers/queue-count.helper";
-import { queueIdentifier } from "../../common/helpers/queue-identifier.helper";
+import { builderQueueIdentifier } from "../utils/builder-queue-identifier";
 import { CountOptions } from "./interfaces/count-options.interface";
 
 /**
@@ -15,7 +15,7 @@ import { CountOptions } from "./interfaces/count-options.interface";
  */
 function countRequest(options: CountOptions): string {
   const { authorization, conversationId, pcc } = options;
-  const queueInfo = queueIdentifier({ pcc });
+  const queueInfo = builderQueueIdentifier({ pcc });
   const body = queueCount(queueInfo)
   return request({ 
     body,

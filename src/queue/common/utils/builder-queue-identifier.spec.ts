@@ -24,6 +24,15 @@ describe('Builder queue identifier', () => {
     expect(xml).toEqual('<QueueIdentifier Number="100" PrefatoryInstructionCode="11" PseudoCityCode="H8GI"/>')
   })
 
+  it('should handle queue count options in identifier options', () => {
+    const payload: QueueIdentifierOptions = {
+      pcc: 'H8GI',
+    };
+    const xml = builderQueueIdentifier(payload)
+    // console.log(xml)
+    expect(xml).toEqual('<QueueIdentifier PseudoCityCode="H8GI"/>')
+  })
+
   it('should handle queue access list options in identifier options', () => {
     const payload: QueueIdentifierOptions = {
       number: '100',
