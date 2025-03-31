@@ -10,6 +10,7 @@ export enum ActionsRQ {
   DAILY_SALES_REPORT = 'DailySalesReportLLSRQ',
   PING = 'OTA_PingRQ',
   ENCODE_DECODE = 'EncodeDecodeLLSRQ',
+  SABRE_COMMAND = 'SabreCommandLLSRQ',
 } 
 
 export enum ActionsRS {
