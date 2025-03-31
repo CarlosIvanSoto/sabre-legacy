@@ -1,7 +1,7 @@
 import { request } from "../../../common/helpers/request.helper";
 import { ActionsRQ } from "../../../common/interfaces/actions.interface";
 import { queueAccess } from "../../common/helpers/queue-access.helper";
-import { queueIdentifier } from "../../common/helpers/queue-identifier.helper";
+import { builderQueueIdentifier } from "../utils/builder-queue-identifier";
 import { AccessOptions } from "./interfaces/access-options.interface";
 
 /**
@@ -15,7 +15,7 @@ import { AccessOptions } from "./interfaces/access-options.interface";
  */
 function accessRequest(options: AccessOptions): string {
   const { pcc, number, authorization, conversationId } = options;
-  const queueInfo = queueIdentifier({ pcc, number });
+  const queueInfo = builderQueueIdentifier({ pcc, number });
   const body = queueAccess(queueInfo);
   return request({
     body, authorization, conversationId, action: ActionsRQ.QUEUE_ACCESS

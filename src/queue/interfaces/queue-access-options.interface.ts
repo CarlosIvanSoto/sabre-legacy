@@ -1,8 +1,8 @@
-import { FormatQueueResponse } from "../common/utils/interfaces"
+import { QueueAccess } from "../common/utils/interfaces"
 
 export interface QueueAccessOptions {
   number: string
   pcc?: string
 }
 
-export interface QueueAccessResponse extends FormatQueueResponse {}
+export interface QueueAccessResponse extends QueueAccess {}
