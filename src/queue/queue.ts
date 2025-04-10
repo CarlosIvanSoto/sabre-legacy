@@ -69,10 +69,10 @@ export class Queue {
       }
     }
     if (!payload.pcc) throw new Error('Missing pcc. Set it in access({ pcc, number })')
-    const { number, pcc } = payload
+    const { number, pcc, primaryPassenger } = payload
     this.sabre.setAction(ActionsRS.QUEUE_ACCESS)
     const xml = await this.sabre.post((opts) => accessListRequest({
-      number, pcc, ...opts
+      number, pcc, primaryPassenger, ...opts
     }))
     const queueAccessList = parseXMLToQueueAccessList(xml)
     return parseAccessListResponseToList({ queueNumber: number }, queueAccessList)

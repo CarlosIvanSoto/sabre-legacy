@@ -20,7 +20,7 @@ interface QueueAccessListLine {
   uniqueID: { iD: string }
 }
 
-interface ListBookingInfo {
+interface LineInfo {
   index: string,
   dateTime: string
   passengerName?: string
@@ -28,9 +28,17 @@ interface ListBookingInfo {
   pcc: string
   bookingId: string
 }
+export interface QueueBookingInfo {
+  num: string,
+  bookingId: string
+  date: string
+  placeBy: string
+  name?: string
+}
 
 export interface QueueAccessList {
-  bookings: Array<ListBookingInfo>
+  lines?: Array<LineInfo>
+  list: Array<QueueBookingInfo>
   paragraph: BookingText
   queue: string
 }

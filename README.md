@@ -79,6 +79,17 @@ const access = await sabre.queue.access({
 });
 ```
 
+Get PNR list from queue (Stateless)
+
+```js
+const accessList = await sabre.queue.accessList({
+  number: "200",
+  pcc: "IPCC1",
+  primaryPassenger: true
+});
+```
+
+
 ## Queue ignore
 
 This service is used for ignore transaction.
