@@ -11,6 +11,7 @@ export enum ActionsRQ {
   PING = 'OTA_PingRQ',
   ENCODE_DECODE = 'EncodeDecodeLLSRQ',
   SABRE_COMMAND = 'SabreCommandLLSRQ',
+  READ_PROFILE = 'EPS_EXT_ProfileReadRQ'
 } 
 
 export enum ActionsRS {
