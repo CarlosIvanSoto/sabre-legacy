@@ -33,12 +33,14 @@ export class Sabre {
     if (!this.options.token && processEnv)
       this.options.token = processEnv.SABRE_SESSION_TOKEN
 
-    if (!this.options.token && (this.options.username || this.options.password || this.options.organization)) {
-      throw new Error(`Missing SabreLegacy authorization. Pass it to the constructor new SabreLegacy({
-        username: '773400', 
-        password: 'PASSWORD_GOES_HERE',
-        organization: '7TZA', // pcc
-      });})`)
+    if (!this.options.username || !this.options.password || !this.options.organization) {
+      if (!this.options.token) {
+        throw new Error(`Pass it to the constructor new SabreLegacy({
+          username: '773400', 
+          password: 'PASSWORD_GOES_HERE',
+          organization: '7TZA', // pcc
+        });})`)
+      }
     }
 
     this.headers = new Headers({

@@ -16,11 +16,11 @@ async function main() {
     return
   }
 
-  const { SABRE_SESSION_TOKEN } = process.env
-  if (!SABRE_SESSION_TOKEN) {
-    console.error('Faltan variables de entorno: SABRE_SESSION_TOKEN')
-    return
-  }
+  // const { SABRE_SESSION_TOKEN } = process.env
+  // if (!SABRE_SESSION_TOKEN) {
+  //   console.error('Faltan variables de entorno: SABRE_SESSION_TOKEN')
+  //   return
+  // }
 
   const { SABRE_ORGANIZATION } = process.env
   if (!SABRE_ORGANIZATION) {
@@ -30,13 +30,13 @@ async function main() {
 
   const sabre = new SabreLegacy()
 
-  try {
-    sabre.setAuthorization(SABRE_SESSION_TOKEN);
-    const res = await sabre.dailySales.summary(options)
-    console.log('Respuesta:', JSON.stringify(res));
-  } catch (err) {
-    console.error('Error al llamar a dailySales.summary:', err)
-  }
+  // try {
+  //   sabre.setAuthorization(SABRE_SESSION_TOKEN);
+  //   const res = await sabre.dailySales.summary(options)
+  //   console.log('Respuesta:', JSON.stringify(res));
+  // } catch (err) {
+  //   console.error('Error al llamar a dailySales.summary:', err)
+  // }
 }
 
 void main()
