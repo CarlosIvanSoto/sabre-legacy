@@ -1,7 +1,9 @@
 {
   // "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "module": "ESNext",
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -13,5 +15,11 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

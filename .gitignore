@@ -3,3 +3,8 @@ dist
 build
 .yarn/*
 !.yarn/releases
+
+.env
+.env.*
+response
+.DS_Store
