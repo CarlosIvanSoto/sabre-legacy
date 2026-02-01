@@ -33,7 +33,7 @@ export class Sabre {
     if (!this.options.token && processEnv)
       this.options.token = processEnv.SABRE_SESSION_TOKEN
 
-    if (!this.options.token && !this.options.username || !this.options.password || !this.options.organization) {
+    if (!this.options.token && (this.options.username || this.options.password || this.options.organization)) {
       throw new Error(`Missing SabreLegacy authorization. Pass it to the constructor new SabreLegacy({
         username: '773400', 
         password: 'PASSWORD_GOES_HERE',
@@ -122,7 +122,11 @@ export class Sabre {
 
   async auth(handlerRequest:(payload: SessionCreateOptions) => string, options: PostOptions = {}): Promise<string> {
     if (!this.options.username || !this.options.password || !this.options.organization)
-      throw new Error('Missing authorization. Pass it to the constructor `new LegacySabre("USERNAME", "PASSWORD", "ORGANIZATION")')
+      throw new Error(`Missing SabreLegacy authorization. Pass it to the constructor new SabreLegacy({
+        username: '773400', 
+        password: 'PASSWORD_GOES_HERE',
+        organization: '7TZA', // pcc
+      });})`)
 
     const requestOptions = {
       method: 'POST',
