@@ -30,8 +30,10 @@ export class Sabre {
       this.options.password = processEnv.SABRE_PASSWORD
     if (!this.options.organization && processEnv)
       this.options.organization = processEnv.SABRE_ORGANIZATION
+    if (!this.options.token && processEnv)
+      this.options.token = processEnv.SABRE_SESSION_TOKEN
 
-    if (!this.options.username || !this.options.password || !this.options.organization) {
+    if (!this.options.token && !this.options.username || !this.options.password || !this.options.organization) {
       throw new Error(`Missing SabreLegacy authorization. Pass it to the constructor new SabreLegacy({
         username: '773400', 
         password: 'PASSWORD_GOES_HERE',
@@ -42,10 +44,12 @@ export class Sabre {
     this.headers = new Headers({
       'User-Agent': userAgent,
       'Content-Type': 'text/xml; charset="utf-8"',
-      'Content-Encoding': 'deflate'
+      'Content-Encoding': 'deflate',
+      'Authorization': this.options.token ? `Bearer ${this.options.token}` : '',
     });
     this.headersRequest = {
-      conversationId, authorization: ''
+      conversationId, 
+      authorization: this.options.token || '',
     }
   }
 

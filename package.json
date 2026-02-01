@@ -41,6 +41,7 @@
     "link": "npm run build & npm link",
     "test": "jest",
     "test:watch": "jest --watch",
+    "prepublish": "npm run build",
     "example:create-session": "node --env-file=.env --import=tsx examples/create-session.ts",
     "example:get-summary": "node --env-file=.env --import=tsx examples/get-summary.ts"
   },
